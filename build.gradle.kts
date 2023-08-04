@@ -34,13 +34,14 @@ repositories {
 }
 
 dependencies {
-  val kliteVersion = "master-SNAPSHOT"
+  val kliteVersion = "1.5.4"
   implementation("com.github.codeborne.klite:klite-server:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-json:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-i18n:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-jdbc:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-slf4j:$kliteVersion")
   implementation("org.postgresql:postgresql:42.6.0")
+  implementation("org.jsoup:jsoup:1.13.1")
   testImplementation("com.github.codeborne.klite:klite-jdbc-test:$kliteVersion")
 }
 

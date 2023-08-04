@@ -55,6 +55,21 @@ fun sampleServer(port: Int = 8080) = Server(listen = InetSocketAddress(port)).ap
     get("/decorated") { "!!!" }
   }
 
+
+  context("/scrape") {
+
+    // TODO control page number using param
+
+    get("/auto24") {
+      Parser.openUrl("https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&ae=1&af=10000&otsi=otsi&ak=0")
+    }
+
+    get("/autoplius") {
+      Parser.openUrl("https://en.autoplius.lt/ads/used-cars?make_id_list=&engine_capacity_from=&engine_capacity_to=&power_from=&power_to=&kilometrage_from=&kilometrage_to=&has_damaged_id=&condition_type_id=&make_date_from=&make_date_to=&sell_price_from=&sell_price_to=&co2_from=&co2_to=&euro_id=&fk_place_countries_id=&qt=&qt_autocomplete=&number_of_seats_id=&number_of_doors_id=&gearbox_id=&steering_wheel_id=&older_not=&order_by=3&order_direction=DESC&page_nr=1")
+    }
+  }
+
+
   context("/api") {
     useOnly<JsonBody>() // in case only json should be supported in this context
     useHashCodeAsETag() // automatically send 304 NotModified if request generates the same response as before
