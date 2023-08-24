@@ -35,6 +35,8 @@ repositories {
 
 dependencies {
   val kliteVersion = "1.5.4"
+  val selenium_version = "4.11.0"
+  val webdriver_manager_version = "5.5.0"
   implementation("com.github.codeborne.klite:klite-server:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-json:$kliteVersion")
   implementation("com.github.codeborne.klite:klite-i18n:$kliteVersion")
@@ -43,6 +45,8 @@ dependencies {
   implementation("org.postgresql:postgresql:42.6.0")
   implementation("org.jsoup:jsoup:1.13.1")
   testImplementation("com.github.codeborne.klite:klite-jdbc-test:$kliteVersion")
+  implementation("org.seleniumhq.selenium:selenium-java:$selenium_version")
+  implementation("io.github.bonigarcia:webdrivermanager:$webdriver_manager_version")
 }
 
 
