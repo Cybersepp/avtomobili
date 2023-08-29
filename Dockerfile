@@ -1,22 +1,26 @@
-FROM openjdk:17-alpine as build
+FROM gradle:jdk11-alpine as build
+
+
+# God forgive me for this 1.5GB image but I just want to see if it works
 
 WORKDIR /app
-RUN apk add binutils # for objcopy, needed by jlink
-RUN jlink --output jre --compress=2 --no-header-files --no-man-pages --strip-debug --add-modules \
-    java.base,jdk.httpserver,java.sql,java.net.http,jdk.crypto.ec,java.naming,java.management
 
-FROM alpine as final
-RUN adduser -S user
-WORKDIR /app
+COPY . /app
 
-COPY --from=build /app/jre /app/jre
-COPY build/libs /app
+# Build the JAR file
+RUN gradle jar
 
-# Run under non-privileged user with minimal write permissions
-USER user
+RUN ls -la build/libs/
+
+# Install Chromedriver
+RUN apk add --no-cache chromium chromium-chromedriver
+
+# Set environment variables for Chromedriver
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV CHROME_DRIVER=/usr/bin/chromedriver
 
 ENV JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=80"
-CMD jre/bin/java -jar *.jar
+CMD java -jar /app/build/libs/klite-klite.jar || tail -f /dev/null
 
 # Heroku redefines exposed port
 ENV PORT=8080

@@ -14,6 +14,7 @@ object SeleniumParser {
         options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36")
 
         driver = ChromeDriver(options)
+        println(driver)
     }
 
 
@@ -22,7 +23,6 @@ object SeleniumParser {
 
         // Find the div element with classname "special"
         val specialDiv: WebElement = driver.findElement(By.cssSelector(".special"))
-
         // Get the HTML content of the special div
         val specialDivHtml = specialDiv.getAttribute("outerHTML")
 
@@ -31,6 +31,7 @@ object SeleniumParser {
 
         // Get the sources of the images
         val imageSources = imageElements.map { it.getAttribute("src") }
+
 
         return imageSources
 

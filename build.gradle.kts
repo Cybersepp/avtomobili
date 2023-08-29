@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream
 
 val mainClassName = "LauncherKt"
 
-
 // Kotlin version info & general info
 plugins {
   kotlin("jvm") version "1.8.22"
@@ -65,8 +64,6 @@ sourceSets {
   }
 }
 
-
-
 // Tasks
 tasks.withType<KotlinCompile> {
   kotlinOptions {
@@ -84,7 +81,7 @@ tasks.jar {
   doFirst {
     manifest {
       attributes(
-        "Main-Class" to mainClassName,
+        "Main-Class" to File("$mainClassName"),
         "Class-Path" to File("$buildDir/libs/deps").listFiles()?.joinToString(" ") { "deps/${it.name}"}
       )
     }
