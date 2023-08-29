@@ -16,9 +16,9 @@ fun sampleServer(port: Int = 8080) = Server(listen = InetSocketAddress(port)).ap
     Config.useEnvFile()
     use<JsonBody>() // enables parsing/sending of application/json requests/responses, depending on the Accept header
 
-    if (Config.isDev) startDevDB() // start docker-compose db automatically
-    use(DBModule(PooledDataSource())) // configure a DataSource
-    use<DBMigrator>() //  migrate the DB
+//    if (Config.isDev) startDevDB() // start docker-compose db automatically
+//    use(DBModule(PooledDataSource())) // configure a DataSource
+//    use<DBMigrator>() //  migrate the DB
     use<RequestTransactionHandler>() // runs each request in a transaction
 
     assets("/", AssetsHandler(Path.of("public"), useIndexForUnknownPaths = true))
