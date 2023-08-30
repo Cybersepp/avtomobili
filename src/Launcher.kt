@@ -51,9 +51,6 @@ fun sampleServer(port: Int = 8080) = Server(listen = InetSocketAddress(port)).ap
 
         get("/failure") { error("Failure") }
 
-        get("/admin") @AdminOnly {
-            "Only for admins"
-        }
 
         get("/param/:param") {
             "Path: ${path("param")}, Query: $queryParams"
